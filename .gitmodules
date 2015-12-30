@@ -1,0 +1,9 @@
+[submodule "cli"]
+	path = cli
+	url = https://github.com/vanuatu/cli
+[submodule "srvc"]
+	path = srvc
+	url = https://github.com/vanuatu/srvc
+[submodule "repo"]
+	path = repo
+	url = https://github.com/vanuatu/repo
