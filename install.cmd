@@ -67,12 +67,6 @@ setlocal
 		set unzip=yes
 		call:startDownload
 
-		set prog=git
-		set file=git.exe
-		set fold=%bse_dir%\git
-		set unzip=yes
-		call:startDownload
-
 		set prog=repo
 		set file=repo.zip
 		set fold=%~dp0
