@@ -95,7 +95,6 @@ setlocal
 	ren srvc-master srvc
 	ren cli-master  cli
 
-
 ::
 ::
 ::
@@ -120,7 +119,6 @@ setlocal
 			2>nul ( >>"%lck_fil%%%N" (call ) ) && (
 				call set inCount=%%inCount: %%N=%%
 			) || (
-				echo file is locked
 				@timeout /t 3 /nobreak >nul
 				goto :WaitParalel
 			)
@@ -128,8 +126,8 @@ setlocal
 	goto:eof
 
 	:startDownload
+		echo %url_def%%prog%
 		set inCount=%inCount% dwn-%prog%
-		echo %prog%
 		start "" cmd /c 9>"%lck_fil%dwn-%prog%" "install.cmd" download
 	goto:eof
 
