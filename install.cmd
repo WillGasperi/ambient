@@ -100,7 +100,6 @@ setlocal
 ::
 
 	rmdir "%lck_fil%" /s /q
-	del install.cmd
 	
 ::
 :: Functions
