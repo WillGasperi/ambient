@@ -78,11 +78,23 @@ setlocal
 		set fold=%~dp0
 		set unzip=yes
 		call:startDownload
+
+		set prog=cli
+		set file=cli.zip
+		set fold=%~dp0
+		set unzip=yes
+		call:startDownload
+
+		set prog=srvc
+		set file=srvc.zip
+		set fold=%~dp0
+		set unzip=yes
+		call:startDownload
 	
 		call:WaitParalel
 
 		rmdir "%lck_fil%" /s /q
-		
+
 ::
 ::
 ::
