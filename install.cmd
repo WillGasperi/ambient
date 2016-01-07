@@ -94,12 +94,15 @@ setlocal
 		call:WaitParalel
 
 		rmdir "%lck_fil%" /s /q
+		del install.cmd
 
 ::
 ::
 ::
 
 	ren repo-master repo
+	ren srvc-master srvc
+	ren cli-master  cli
 	
 ::
 :: Functions
