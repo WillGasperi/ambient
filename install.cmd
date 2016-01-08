@@ -139,12 +139,13 @@ setlocal
 	goto:eof
 	
 	:downloadFunction
-		echo download started: %url_def%%prog%
 
 		if not exist "%fold%" mkdir "%fold%"
 		if exist "%fold%\%file%" (
-			echo existe manolo
+			echo found file: %url_def%%prog%
 			goto:eof
+		) else (
+			echo download started: %url_def%%prog%
 		)
 
 		REM powershell -Command "Invoke-WebRequest %url_def%%prog% -OutFile '%fold%\%file%'"
