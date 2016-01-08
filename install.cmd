@@ -67,6 +67,10 @@ setlocal
 		set unzip=yes
 		call:startDownload
 
+	if "%1"=="ignore-vanuatu" (
+		goto :endVanuatuTools
+	)
+	
 		set prog=repo
 		set file=repo.zip
 		set fold=%~dp0
@@ -84,6 +88,8 @@ setlocal
 		set fold=%~dp0
 		set unzip=yes
 		call:startDownload
+	
+	:endVanuatuTools
 	
 		call:WaitParalel
 
