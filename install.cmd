@@ -125,7 +125,6 @@ setlocal
 	goto:eof
 
 	:startDownload
-		echo %url_def%%prog%
 		set inCount=%inCount% dwn-%prog%
 		start "" /B cmd /c 9>"%lck_fil%dwn-%prog%" "install.cmd" download
 	goto:eof
@@ -139,13 +138,7 @@ setlocal
 		mode con: cols=80 lines=12
 		title AMBIENT DOWNLOADING
 
-		echo Wait, downloading %file%
-		echo from url: %url_def%%prog%
-		echo to folder: %fold%
-		echo.
-		echo DONT CLOSE THIS WINDOW
-		echo DONT CLOSE THIS WINDOW
-		echo DONT CLOSE THIS WINDOW
+		echo download started: %url_def%%prog%
 
 		if not exist "%fold%" mkdir "%fold%"
 		if exist "%fold%\%file%" (
@@ -155,6 +148,8 @@ setlocal
 
 		REM powershell -Command "Invoke-WebRequest %url_def%%prog% -OutFile '%fold%\%file%'"
 		powershell -Command (New-Object System.Net.WebClient).DownloadFile('%url_def%%prog%', '%fold%\%file%')
+
+		echo download completed: %url_def%%prog%
 
 		if %errorlevel% neq 0 (
 			title AMBIENT DOWNLOADING - ERROR
