@@ -131,7 +131,7 @@ setlocal
 
 	:startUnpack
 		set inCount=%inCount% upk-%prog%
-		start "" cmd /c 9>"%lck_fil%upk-%prog%" "install.cmd" unpack
+		start "" /B cmd /c 9>"%lck_fil%upk-%prog%" "install.cmd" unpack
 	goto:eof
 	
 	:downloadFunction
