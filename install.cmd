@@ -135,9 +135,6 @@ setlocal
 	goto:eof
 	
 	:downloadFunction
-		mode con: cols=80 lines=12
-		title AMBIENT DOWNLOADING
-
 		echo download started: %url_def%%prog%
 
 		if not exist "%fold%" mkdir "%fold%"
@@ -152,11 +149,10 @@ setlocal
 		echo download completed: %url_def%%prog%
 
 		if %errorlevel% neq 0 (
-			title AMBIENT DOWNLOADING - ERROR
-			echo Para maiores detalhes acesse "%err_fil%"
+			echo Para maiores detalhes acesse: "%err_fil%"
 			if not exist "%err_fil%" mkdir "%err_fil%"
 			echo "Download error">>%err_fil%\%file%.log
-			pause
+			exit /b
 		) else (
 			if %unzip%==yes (
 				goto :startUnpack
