@@ -153,7 +153,8 @@ setlocal
 			goto:eof
 		)
 
-		powershell -Command "Invoke-WebRequest %url_def%%prog% -OutFile '%fold%\%file%'"
+		REM powershell -Command "Invoke-WebRequest %url_def%%prog% -OutFile '%fold%\%file%'"
+		powershell -Command (New-Object System.Net.WebClient).DownloadFile('%url_def%%prog%', '%fold%\%file%')
 
 		if %errorlevel% neq 0 (
 			title AMBIENT DOWNLOADING - ERROR
