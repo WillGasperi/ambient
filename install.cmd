@@ -50,7 +50,6 @@ setlocal
 
 	if not exist %zip% (
 		echo 7za not found, please try execute the download again
-		pause
 		goto:eof
 	)
 
