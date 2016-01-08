@@ -161,11 +161,11 @@ setlocal
 	goto:eof
 	
 	:unpackFunction
-		mode con: cols=80 lines=12
-		title AMBIENT UNPACKING
-		echo Unpacking: "%fold%\%file%"
+		echo unpack started: "%fold%\%file%"
 		
 		set inCount=%inCount% %prog%
-		%zip% x "%fold%\%file%" "-o%fold%" -y
+		%zip% x "%fold%\%file%" "-o%fold%" -y>null
 		del "%fold%\%file%"
+		
+		echo unpack complete: "%fold%\%file%"
 	goto:eof
