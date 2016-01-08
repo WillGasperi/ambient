@@ -147,16 +147,16 @@ setlocal
 
 		if not exist "%fold%" mkdir "%fold%"
 		if exist "%chck%" (
-			echo found file: %url_def%%prog%
+			echo file already exists  : %url_def%%prog%
 			goto:eof
 		) else (
-			echo download started: %url_def%%prog%
+			echo download started     : %url_def%%prog%
 		)
 
 		REM powershell -Command "Invoke-WebRequest %url_def%%prog% -OutFile '%fold%\%file%'"
 		powershell -Command (New-Object System.Net.WebClient).DownloadFile('%url_def%%prog%', '%fold%\%file%')
 
-		echo download completed: %url_def%%prog%
+		echo download completed   : %url_def%%prog%
 
 		if %errorlevel% neq 0 (
 			echo Para maiores detalhes acesse: "%err_fil%"
@@ -171,11 +171,11 @@ setlocal
 	goto:eof
 	
 	:unpackFunction
-		echo unpack started: "%fold%\%file%"
+		echo unpack started       : %fold%\%file%
 		
 		set inCount=%inCount% %prog%
 		%zip% x "%fold%\%file%" "-o%fold%" -y>nul
 		del "%fold%\%file%"
 		
-		echo unpack complete: "%fold%\%file%"
+		echo unpack complete      : %fold%\%file%
 	goto:eof
