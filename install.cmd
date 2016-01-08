@@ -164,7 +164,7 @@ setlocal
 		echo unpack started: "%fold%\%file%"
 		
 		set inCount=%inCount% %prog%
-		%zip% x "%fold%\%file%" "-o%fold%" -y>null
+		%zip% x "%fold%\%file%" "-o%fold%" -y>nul
 		del "%fold%\%file%"
 		
 		echo unpack complete: "%fold%\%file%"
