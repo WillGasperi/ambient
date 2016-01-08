@@ -158,7 +158,7 @@ setlocal
 			echo Para maiores detalhes acesse: "%err_fil%"
 			if not exist "%err_fil%" mkdir "%err_fil%"
 			echo "Download error">>%err_fil%\%file%.log
-			exit /b
+			cancel
 		) else (
 			if %unzip%==yes (
 				goto :startUnpack
