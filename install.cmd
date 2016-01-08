@@ -34,42 +34,38 @@ setlocal
 :: downloading files
 ::
 
-	:downloadSection
-	
-		set inCount=
+	set inCount=
 
-		set prog=7za32
-		set file=7za.exe
-		set fold=%bse_dir%\7zip\x86
-		set unzip=no
-		set zip="%fold%\%file%"
-		call:startDownload
+	set prog=7za32
+	set file=7za.exe
+	set fold=%bse_dir%\7zip\x86
+	set unzip=no
+	set zip="%fold%\%file%"
+	call:startDownload
 
-		call:WaitParalel
+	call:WaitParalel
 
-		set inCount=
+	set inCount=
 
-		if not exist %zip% (
-			echo 7za not found, please try execute the download again
-			pause
-			goto:eof
-		)
-
-		set prog=node
-		set file=node.exe
-		set fold=%bse_dir%\node
-		set unzip=no
-		call:startDownload
-
-		set prog=npm
-		set file=npm.zip
-		set fold=%bse_dir%\node
-		set unzip=yes
-		call:startDownload
-
-	if "%1"=="ignore-vanuatu" (
-		goto :endVanuatuTools
+	if not exist %zip% (
+		echo 7za not found, please try execute the download again
+		pause
+		goto:eof
 	)
+
+	set prog=node
+	set file=node.exe
+	set fold=%bse_dir%\node
+	set unzip=no
+	call:startDownload
+
+	set prog=npm
+	set file=npm.zip
+	set fold=%bse_dir%\node
+	set unzip=yes
+	call:startDownload
+
+	if not "%1"=="ignore-vanuatu" (
 	
 		set prog=repo
 		set file=repo.zip
@@ -89,18 +85,20 @@ setlocal
 		set unzip=yes
 		call:startDownload
 	
-	:endVanuatuTools
+	)
 	
-		call:WaitParalel
+	call:WaitParalel
 
 ::
 ::
 ::
 
-	ren repo-master repo
-	ren srvc-master srvc
-	ren cli-master  cli
-
+	if not "%1"=="ignore-vanuatu" (
+		ren repo-master repo
+		ren srvc-master srvc
+		ren cli-master  cli
+	)
+	
 ::
 ::
 ::
