@@ -57,7 +57,7 @@ setlocal
 	set file=node.exe
 	set fold=%bse_dir%\node
 	set unzip=no
-	call:startDownloadAAAA
+	call:startDownload
 
 	set prog=npm
 	set file=npm.zip
