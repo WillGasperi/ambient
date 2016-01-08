@@ -2,7 +2,7 @@
 setlocal
 
 ::
-::
+:: CHECK PARAMETERS
 ::
 
 	if "%1"=="download" (
@@ -14,7 +14,7 @@ setlocal
 	)
 
 ::
-::
+:: SET ENVIRONMENT VARS
 ::
 
 	set "url_def=http://vanuatu.com.br/getlast/?"
@@ -23,7 +23,7 @@ setlocal
 	set "err_fil=.\error\"
 
 ::
-::
+:: CREATE AND DELETE FOLDERS
 ::
 
 	if not exist "%lck_fil%"     mkdir "%lck_fil%"
@@ -31,7 +31,7 @@ setlocal
 	if     exist "%err_fil%"     rmdir "%err_fil%" /s /q
 
 ::
-:: downloading files
+:: DOWNLOADING FILES
 ::
 
 	set inCount=
@@ -39,6 +39,7 @@ setlocal
 	set prog=7za32
 	set file=7za.exe
 	set fold=%bse_dir%\7zip\x86
+	set chck=%bse_dir%\7zip\x86\7za.exe
 	set unzip=no
 	set zip="%fold%\%file%"
 	call:startDownload
@@ -56,32 +57,37 @@ setlocal
 	set prog=node
 	set file=node.exe
 	set fold=%bse_dir%\node
+	set chck=%bse_dir%\node\node.exe
 	set unzip=no
 	call:startDownload
 
 	set prog=npm
 	set file=npm.zip
 	set fold=%bse_dir%\node
+	set chck=%bse_dir%\node\npm.cmd
 	set unzip=yes
 	call:startDownload
 
-	if not "%1"=="ignore-vanuatu" (
+	if not "%1"=="ignore-vanuatu-tools" (
 	
 		set prog=repo
 		set file=repo.zip
 		set fold=%~dp0
+		set chck=%~dp0\repo\repo.cmd
 		set unzip=yes
 		call:startDownload
 
 		set prog=cli
 		set file=cli.zip
 		set fold=%~dp0
+		set chck=%~dp0\cli\cli.cmd
 		set unzip=yes
 		call:startDownload
 
 		set prog=srvc
 		set file=srvc.zip
 		set fold=%~dp0
+		set chck=%~dp0\srvc\srvc.cmd
 		set unzip=yes
 		call:startDownload
 	
@@ -90,23 +96,23 @@ setlocal
 	call:WaitParalel
 
 ::
-::
+:: RENAME VANUATU TOOLS
 ::
 
-	if not "%1"=="ignore-vanuatu" (
-		ren repo-master repo
-		ren srvc-master srvc
-		ren cli-master  cli
+	if not "%1"=="ignore-vanuatu-tools" (
+		if exist repo-master ren repo-master repo
+		if exist srvc-master ren srvc-master srvc
+		if exist cli-master  ren cli-master  cli
 	)
 	
 ::
-::
+:: DELETE LOCK FOLDER
 ::
 
 	rmdir "%lck_fil%" /s /q
 	
 ::
-:: Functions
+:: FUNCTIONS
 ::
 
 	goto:eof
@@ -141,7 +147,7 @@ setlocal
 	:downloadFunction
 
 		if not exist "%fold%" mkdir "%fold%"
-		if exist "%fold%\%file%" (
+		if exist "%chck%" (
 			echo found file: %url_def%%prog%
 			goto:eof
 		) else (
