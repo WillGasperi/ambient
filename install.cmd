@@ -127,7 +127,7 @@ setlocal
 	:startDownload
 		echo %url_def%%prog%
 		set inCount=%inCount% dwn-%prog%
-		start "" cmd /c 9>"%lck_fil%dwn-%prog%" "install.cmd" download
+		start "" /B cmd /c 9>"%lck_fil%dwn-%prog%" "install.cmd" download
 	goto:eof
 
 	:startUnpack
