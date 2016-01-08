@@ -38,8 +38,8 @@ setlocal
 
 	set prog=7za32
 	set file=7za.exe
-	set fold=%bse_dir%\7zip\x86
-	set chck=%bse_dir%\7zip\x86\7za.exe
+	set fold=%bse_dir%\7zip\
+	set chck=%bse_dir%\7zip\7za.exe
 	set unzip=no
 	set zip="%fold%\%file%"
 	call:startDownload
