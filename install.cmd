@@ -50,7 +50,7 @@ setlocal
 
 	if not exist %zip% (
 		echo 7za not found, please try execute the download again
-		goto:eof
+		goto:end
 	)
 
 	set prog=node
@@ -114,13 +114,13 @@ setlocal
 :: FUNCTIONS
 ::
 
-	goto:eof
+	goto:end
 
 	:WaitParalel
 		if exist %err_fil%\*.log (
 			echo Erro ao fazer download de um ou mais arquivos, verifique os log na pasta %err_fil%
 			taskkill /F /FI "WindowTitle eq AMBIENT DOWNLOADING" /T >nul
-			goto:eof
+			goto:end
 		)
 		
 		for %%N in (%inCount%) do (
@@ -131,24 +131,24 @@ setlocal
 				goto :WaitParalel
 			)
 		)
-	goto:eof
+	goto:end
 
 	:startDownload
 		set inCount=%inCount% dwn-%prog%
 		start "" /B cmd /c 9>"%lck_fil%dwn-%prog%" "install.cmd" download
-	goto:eof
+	goto:end
 
 	:startUnpack
 		set inCount=%inCount% upk-%prog%
 		start "" /B cmd /c 9>"%lck_fil%upk-%prog%" "install.cmd" unpack
-	goto:eof
+	goto:end
 	
 	:downloadFunction
 
 		if not exist "%fold%" mkdir "%fold%"
 		if exist "%chck%" (
 			echo file already exists  : %url_def%%prog%
-			goto:eof
+			goto:end
 		) else (
 			echo download started     : %url_def%%prog%
 		)
@@ -168,7 +168,7 @@ setlocal
 				goto :startUnpack
 			)
 		)
-	goto:eof
+	goto:end
 	
 	:unpackFunction
 		echo unpack started       : %fold%\%file%
@@ -178,4 +178,10 @@ setlocal
 		del "%fold%\%file%"
 		
 		echo unpack complete      : %fold%\%file%
-	goto:eof
+	goto:end
+
+::
+:: IT'S OVER BABY
+::
+
+:end
